@@ -1,4 +1,4 @@
-add_executable(myApp
+add_executable(myApp ${APPLICATION_TYPE}
 	myApp_main.cxx
 	myCustomWidget.cxx
 	myMainWindow.cxx

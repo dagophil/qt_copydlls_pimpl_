@@ -11,6 +11,7 @@ std::ostream& operator<<(std::ostream& stream, EndLog const&)
 {
   stream << "\n";
   stream.flush();
+  return stream;
 }
 
 std::ostream loginfo(&getWidgetLogger());
