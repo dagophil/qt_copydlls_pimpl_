@@ -1,5 +1,6 @@
 #include "widget_logger.h"
 
+#include <QApplication>
 #include <QLabel>
 #include <QTextEdit>
 #include <QVBoxLayout>
@@ -88,6 +89,9 @@ void WidgetLogger::Pimpl::create_widget()
   this->widget = new QWidget();
   this->widget->setFixedSize(800, 600);
   this->widget->setContentsMargins(0, 0, 0, 0);
+  this->widget->setAttribute(Qt::WA_DeleteOnClose);
+  QObject::connect(this->widget, &QWidget::destroyed,
+    qApp, &QApplication::quit);
 
   this->textEdit = new QTextEdit();
   this->textEdit->setReadOnly(true);
