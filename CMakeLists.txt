@@ -16,19 +16,15 @@ set(MY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${MY_OUTPUT_DIRECTORY}")
 
 # Set the logging target.
-# 0: Log to console.
-# 1: Log to widget.
-set(LOGGING_TARGET 1)
+set(LOG_TO_WIDGET ON CACHE BOOL "Log to widget instead of console")
 
 # Set the source files for the logging target.
-if (${LOGGING_TARGET} EQUAL 0)
-  set(LOGGING_SOURCES "${MY_SOURCE_DIRECTORY}/logger/use_cout_logger.cxx" "${MY_SOURCE_DIRECTORY}/logger/cout_logger.cxx")
-  set(APPLICATION_TYPE)
-elseif(${LOGGING_TARGET} EQUAL 1)
+if (${LOG_TO_WIDGET})
   set(LOGGING_SOURCES "${MY_SOURCE_DIRECTORY}/logger/use_widget_logger.cxx" "${MY_SOURCE_DIRECTORY}/logger/widget_logger.cxx")
   set(APPLICATION_TYPE WIN32)
 else()
-  message(FATAL_ERROR "Unknown logging target: ${LOGGING_TARGET}")
+  set(LOGGING_SOURCES "${MY_SOURCE_DIRECTORY}/logger/use_cout_logger.cxx" "${MY_SOURCE_DIRECTORY}/logger/cout_logger.cxx")
+  set(APPLICATION_TYPE)
 endif()
 
 # Add a function to copy dlls to the output directory.
